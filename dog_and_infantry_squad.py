@@ -8,34 +8,48 @@ class DogAndInfantrySquad(Scene):
         infantry_squad = Square(
             side_length=3, color=GREEN, fill_opacity=0.3, stroke_color=GREEN
         )
-        infantry_squad.shift(0.5 * infantry_squad.side_length * DOWN)
         INFANTRY_SQUAD_TOTAL_SHIFT = infantry_squad.side_length * UP
-        dog = Dot().next_to(infantry_squad, DOWN, buff=0)
-        DOG_POS_FIRST_PHASE = UP
-        numberPlane = NumberPlane()
+        infantry_squad.shift(0.5 * -INFANTRY_SQUAD_TOTAL_SHIFT)
+        dog = Dot(infantry_squad.get_bottom()).scale(3).set_color(RED)
+        SQUAD_MARKER = (
+            Group(
+                DashedLine(DOWN + LEFT, DOWN + RIGHT),
+                DashedLine(DOWN + RIGHT, UP + RIGHT),
+                DashedLine(UP + RIGHT, UP + LEFT),
+                DashedLine(UP + LEFT, DOWN + LEFT),
+            )
+            .scale(1.5)
+            .shift(0.5 * -INFANTRY_SQUAD_TOTAL_SHIFT)
+        )
+        self.play(FadeIn(SQUAD_MARKER, infantry_squad, dog))
 
-        TOTAL_ANIMATION_TIME = 2
-        T_1 = (0.5 * (2**0.5)) * TOTAL_ANIMATION_TIME
-        T_2 = TOTAL_ANIMATION_TIME - T_1
-        INFANTRY_SQUAD_FIRST_SHIFT = (0.5 * (2**0.5)) * INFANTRY_SQUAD_TOTAL_SHIFT
-        g = VGroup(infantry_squad, dog)
-        self.add(numberPlane, g)
+        two_phases_animation_time = 3
+        SQRT2_OVER_2 = 0.5 * (2**0.5)
+        T_1 = SQRT2_OVER_2 * two_phases_animation_time
+        INFANTRY_SQUAD_FIRST_SHIFT = SQRT2_OVER_2 * INFANTRY_SQUAD_TOTAL_SHIFT
+        self.play(
+            infantry_squad.animate.shift(INFANTRY_SQUAD_FIRST_SHIFT),
+            dog.animate.shift(INFANTRY_SQUAD_FIRST_SHIFT + INFANTRY_SQUAD_TOTAL_SHIFT),
+            run_time=T_1,
+            rate_func=linear,
+        )
+
+        T_2 = two_phases_animation_time - T_1
+        INFANTRY_SQUAD_SECOND_SHIFT = (
+            INFANTRY_SQUAD_TOTAL_SHIFT - INFANTRY_SQUAD_FIRST_SHIFT
+        )
+        self.play(
+            infantry_squad.animate.shift(INFANTRY_SQUAD_SECOND_SHIFT),
+            dog.animate.shift(INFANTRY_SQUAD_SECOND_SHIFT - INFANTRY_SQUAD_TOTAL_SHIFT),
+            run_time=T_2,
+            rate_func=linear,
+        )
         self.wait()
-        # anim first phase (count time and shift)
-        # anim second phase (2 - count time and move to)
 
-        # self.play(g.animate.shift(infantry_squad.side_length * UP))
-        # self.wait()
-
-        # self.add(numberPlane, infantry_squad, dog)
-        # self.wait()
-        # self.play(
-        #     infantry_squad.animate(rate_func=linear, run_time=2).shift(
-        #         infantry_squad.side_length * UP
-        #     ),
-        #     dog.animate(rate_func=linear, run_time=1.5).move_to(DOG_POS_FIRST_PHASE),
-        # )
-        # self.wait()
+        # show arrow and text label
+        # question_text = "DISTANCE = ?"
+        # g2 = VGroup(question_text)
+        # self.play(FadeIn(g2))
 
 
 # manim -p -ql dog_and_infantry_squad.py DogAndInfantrySquad
