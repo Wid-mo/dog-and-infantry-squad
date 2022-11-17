@@ -47,9 +47,10 @@ class DogAndInfantrySquad(Scene):
         self.wait()
 
         # show arrow and text label
-        # question_text = "DISTANCE = ?"
-        # g2 = VGroup(question_text)
-        # self.play(FadeIn(g2))
+
+        question_text = Text("DISTANCE = ?").scale(7).set_color(RED)
+        g = VGroup(question_text)
+        self.play(FadeOut(dog), FadeIn(g))
 
 
 # manim -p -ql dog_and_infantry_squad.py DogAndInfantrySquad
