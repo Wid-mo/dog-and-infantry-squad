@@ -48,9 +48,19 @@ class DogAndInfantrySquad(Scene):
 
         # show arrow and text label
 
-        question_text = Text("DISTANCE = ?").scale(7).set_color(RED)
-        g = VGroup(question_text)
+        question_text = Text("DISTANCE = ?").scale(2).set_color(RED).shift(RIGHT + DOWN)
+        line1 = Line(
+            -INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * LEFT,
+            INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * LEFT,
+        )
+        line2 = Line(
+            INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * LEFT,
+            INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * RIGHT,
+        )
+        arrow = Arrow(INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * RIGHT, 0.1 * RIGHT, buff=0)
+        g = VGroup(question_text, line1, line2, arrow).set_color(RED)
         self.play(FadeOut(dog), FadeIn(g))
+        self.wait()
 
 
 # manim -p -ql dog_and_infantry_squad.py DogAndInfantrySquad
