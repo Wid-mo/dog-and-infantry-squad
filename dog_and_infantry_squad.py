@@ -4,6 +4,7 @@ from manim import *
 class DogAndInfantrySquad(Scene):
     def construct(self):
         """INTRODUCTION"""
+        self.next_section("Introduction", skip_animations=True)
 
         infantry_squad = Square(
             side_length=3, color=GREEN, fill_opacity=0.3, stroke_color=GREEN
@@ -61,6 +62,109 @@ class DogAndInfantrySquad(Scene):
         g = VGroup(question_text, line1, line2, arrow).set_color(RED)
         self.play(FadeOut(dog), FadeIn(g))
         self.wait()
+        self.clear()
+
+        """CUES 1/3"""
+        self.next_section("Cues 1 / 3", skip_animations=True)
+
+        self.add(Text("PAUSE"), Text("and try to solve").shift(DOWN))
+        self.wait(duration=3)
+        self.clear()
+        self.add(Text("CUES 1 / 3"))
+        self.wait(duration=1)
+        self.clear()
+        self.add(MarkupText("SIMPLIFY    s<sub>2</sub>"))
+        self.wait(duration=1)
+        self.clear()
+
+        DOG_POS_FIRST_PHASE = INFANTRY_SQUAD_FIRST_SHIFT
+        s1_line = Line(
+            -INFANTRY_SQUAD_TOTAL_SHIFT,
+            DOG_POS_FIRST_PHASE,
+        ).set_color(RED)
+        dog.move_to(DOG_POS_FIRST_PHASE)
+        infantry_squad.shift(-INFANTRY_SQUAD_SECOND_SHIFT)
+        s2_line = Line(DOG_POS_FIRST_PHASE, ORIGIN)
+        s2_b = Brace(
+            s2_line,
+            direction=s2_line.copy().rotate(-PI / 2).get_unit_vector(),
+            buff=2,
+        )
+        s2_text = MarkupText("s<sub>2</sub>").next_to(s2_b, RIGHT)
+        self.add(SQUAD_MARKER, infantry_squad, s1_line, dog, s2_b, s2_text)
+        self.wait()
+
+        s1_b = Brace(
+            s1_line,
+            direction=s2_line.copy().rotate(PI / 2).get_unit_vector(),
+            buff=2,
+        ).set_color(RED)
+        s1_text = MarkupText("s<sub>1</sub>").next_to(s1_b, LEFT).set_color(RED)
+        side_text = Text("1").next_to(SQUAD_MARKER.get_left(), RIGHT)
+        self.play(FadeIn(s1_b, s1_text, side_text))
+        self.wait()
+
+        squad_dashed_line = SQUAD_MARKER[-1].copy()  # left side
+        squad_line = Line(-INFANTRY_SQUAD_TOTAL_SHIFT, ORIGIN)
+        s2_text_next = MarkupText("s<sub>1</sub> - 1").next_to(s2_b, RIGHT)
+        side_text_next = Text("1").next_to(squad_line, RIGHT)
+        self.play(
+            Transform(squad_dashed_line, squad_line),
+            Transform(side_text, side_text_next),
+        )
+        self.wait()
+        self.play(Transform(s2_text, s2_text_next))
+        self.wait()
+        self.clear()
+
+        """CUES 2/3"""
+        self.next_section("Cues 2/3", skip_animations=True)
+
+        self.add(Text("CUES 2 / 3"))
+        self.wait(duration=1)
+        self.clear()
+        self.add(MarkupText("TIME IN PERCENT UNITS"))
+        self.wait(duration=1)
+        self.clear()
+
+        t1_b = Brace(
+            s1_line,
+            direction=s1_line.copy().rotate(PI / 2).get_unit_vector(),
+            buff=2,
+        )
+        t1_text = MarkupText("t<sub>1</sub>").next_to(t1_b, LEFT)
+        t2_b = Brace(
+            s2_line,
+            direction=s2_line.copy().rotate(PI / 2).get_unit_vector(),
+            buff=2,
+        )
+        t2_text = MarkupText("t<sub>2</sub>").next_to(t2_b, RIGHT)
+        self.add(SQUAD_MARKER, infantry_squad, t1_b, t1_text, t2_b, t2_text)
+        self.wait()
+
+        self.play(FadeIn(MarkupText("t<sub>1</sub> + t<sub>2</sub> = 1").to_edge(UP)))
+        self.wait()
+
+        t2_text_next = MarkupText("1 - t<sub>1</sub>").next_to(t2_b, RIGHT)
+        self.play(Transform(t2_text, t2_text_next))
+        self.wait()
+        self.clear()
+
+        """CUES 3/3"""
+        self.next_section("Cues 3/3")
+
+        self.add(Text("CUES 3 / 3"))
+        self.wait(duration=1)
+        self.clear()
+        self.add(MarkupText("SIMPLITY s<sub>1</sub>"))
+        self.wait(duration=1)
+        self.clear()
+
+        #
+
+
+        self.wait()
+
 
 
 # manim -p -ql dog_and_infantry_squad.py DogAndInfantrySquad
