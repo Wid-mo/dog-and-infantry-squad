@@ -160,9 +160,8 @@ class DogAndInfantrySquad(Scene):
         self.wait(duration=1)
         self.clear()
 
-        #
-
-
+        
+        self.add(SQUAD_MARKER, infantry_squad, s1_b, s1_text)
         self.wait()
 
 
