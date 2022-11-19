@@ -96,7 +96,7 @@ class DogAndInfantrySquad(Scene):
 
         s1_b = Brace(
             s1_line,
-            direction=s2_line.copy().rotate(PI / 2).get_unit_vector(),
+            direction=s1_line.copy().rotate(PI / 2).get_unit_vector(),
             buff=2,
         ).set_color(RED)
         s1_text = MarkupText("s<sub>1</sub>").next_to(s1_b, LEFT).set_color(RED)
@@ -160,10 +160,67 @@ class DogAndInfantrySquad(Scene):
         self.wait(duration=1)
         self.clear()
 
-        
-        self.add(SQUAD_MARKER, infantry_squad, s1_b, s1_text)
+        infantry_squad.shift(INFANTRY_SQUAD_SECOND_SHIFT)
+        dog.move_to(ORIGIN)
+        all_height_line = Line(-INFANTRY_SQUAD_TOTAL_SHIFT, INFANTRY_SQUAD_TOTAL_SHIFT)
+        all_height_text = Text("2").next_to(all_height_line, RIGHT)
+        self.add(SQUAD_MARKER, infantry_squad, all_height_line, all_height_text)
         self.wait()
 
+        squad_line = Line(
+            infantry_squad.get_bottom(), infantry_squad.get_top()
+        ).set_color(RED)
+        squad_text = Text("1").next_to(squad_line, RIGHT).set_color(RED)
+        self.play(FadeIn(squad_line, squad_text))
+        self.wait()
+
+        total_distance_line = Line(
+            all_height_line, end=all_height_line.get_end() - INFANTRY_SQUAD_TOTAL_SHIFT
+        )
+        # TODO remove distance line and add new with half length
+        total_distance_text = Text("1").next_to(total_distance_line, RIGHT)
+        self.play(
+            ReplacementTransform(all_height_line, total_distance_line),
+            ReplacementTransform(all_height_text, total_distance_text),
+            FadeOut(squad_line, squad_text),
+        )
+        self.wait()
+
+        squad_marker_b = Brace(total_distance_line, direction=LEFT, buff=2)
+        t1_plus_t2_text = MarkupText("1*(t<sub>1</sub> + t<sub>2</sub>)").next_to(
+            squad_marker_b, LEFT
+        )
+        self.play(
+            FadeIn(squad_marker_b),
+            ReplacementTransform(total_distance_text, t1_plus_t2_text),
+            FadeOut(total_distance_line),
+        )
+        self.wait()
+
+        INFANTRY_SQUAD_FIRST_PHASE = infantry_squad.copy().shift(
+            -INFANTRY_SQUAD_SECOND_SHIFT
+        )
+        line = Line(-INFANTRY_SQUAD_TOTAL_SHIFT, -INFANTRY_SQUAD_TOTAL_SHIFT)
+        dog.move_to(-INFANTRY_SQUAD_TOTAL_SHIFT)
+        dog_dest = dog.copy().move_to(DOG_POS_FIRST_PHASE)
+        line_for_brace = Line(
+            -INFANTRY_SQUAD_TOTAL_SHIFT,
+            -INFANTRY_SQUAD_TOTAL_SHIFT + INFANTRY_SQUAD_FIRST_SHIFT,
+        )
+        squad_marker_next_b = Brace(line_for_brace, direction=LEFT, buff=2)
+        # TODO divide text and proper translate it
+        text_with_t1_text = MarkupText("1*(t<sub>1</sub>          )").next_to(
+            squad_marker_next_b, LEFT
+        )
+        self.play(
+            Transform(infantry_squad, INFANTRY_SQUAD_FIRST_PHASE),
+            Transform(line, s1_line.set_color(WHITE)),
+            Transform(dog, dog_dest),
+            Transform(squad_marker_b, squad_marker_next_b),
+            ReplacementTransform(t1_plus_t2_text, text_with_t1_text),
+            run_time=2,
+        )
+        self.wait()
 
 
 # manim -p -ql dog_and_infantry_squad.py DogAndInfantrySquad
