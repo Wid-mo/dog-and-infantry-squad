@@ -49,16 +49,17 @@ class DogAndInfantrySquad(Scene):
 
         # show arrow and text label
 
+        DOG_POS_FIRST_PHASE = INFANTRY_SQUAD_FIRST_SHIFT
         question_text = Text("DISTANCE = ?").scale(2).set_color(RED).shift(RIGHT + DOWN)
         line1 = Line(
             -INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * LEFT,
-            INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * LEFT,
+            DOG_POS_FIRST_PHASE + 0.1 * LEFT,
         )
         line2 = Line(
-            INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * LEFT,
-            INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * RIGHT,
+            DOG_POS_FIRST_PHASE + 0.1 * LEFT,
+            DOG_POS_FIRST_PHASE + 0.1 * RIGHT,
         )
-        arrow = Arrow(INFANTRY_SQUAD_TOTAL_SHIFT + 0.1 * RIGHT, 0.1 * RIGHT, buff=0)
+        arrow = Arrow(DOG_POS_FIRST_PHASE + 0.1 * RIGHT, 0.1 * RIGHT, buff=0)
         g = VGroup(question_text, line1, line2, arrow).set_color(RED)
         self.play(FadeOut(dog), FadeIn(g))
         self.wait()
@@ -77,7 +78,6 @@ class DogAndInfantrySquad(Scene):
         self.wait(duration=1)
         self.clear()
 
-        DOG_POS_FIRST_PHASE = INFANTRY_SQUAD_FIRST_SHIFT
         s1_line = Line(
             -INFANTRY_SQUAD_TOTAL_SHIFT,
             DOG_POS_FIRST_PHASE,
@@ -151,7 +151,7 @@ class DogAndInfantrySquad(Scene):
         self.clear()
 
         """CUES 3/3"""
-        self.next_section("Cues 3/3")
+        self.next_section("Cues 3/3", skip_animations=True)
 
         self.add(Text("CUES 3 / 3"))
         self.wait(duration=1)
@@ -170,19 +170,19 @@ class DogAndInfantrySquad(Scene):
         squad_line = Line(
             infantry_squad.get_bottom(), infantry_squad.get_top()
         ).set_color(RED)
-        squad_text = Text("1").next_to(squad_line, RIGHT).set_color(RED)
-        self.play(FadeIn(squad_line, squad_text))
+        one_text = Text("1").next_to(squad_line, RIGHT).set_color(RED)
+        self.play(FadeIn(squad_line, one_text))
         self.wait()
 
         total_distance_line = Line(
             all_height_line, end=all_height_line.get_end() - INFANTRY_SQUAD_TOTAL_SHIFT
         )
-        # TODO remove distance line and add new with half length
+        self.remove(all_height_line)
+        self.add(total_distance_line)
         total_distance_text = Text("1").next_to(total_distance_line, RIGHT)
         self.play(
-            ReplacementTransform(all_height_line, total_distance_line),
             ReplacementTransform(all_height_text, total_distance_text),
-            FadeOut(squad_line, squad_text),
+            FadeOut(squad_line, one_text),
         )
         self.wait()
 
@@ -200,26 +200,75 @@ class DogAndInfantrySquad(Scene):
         INFANTRY_SQUAD_FIRST_PHASE = infantry_squad.copy().shift(
             -INFANTRY_SQUAD_SECOND_SHIFT
         )
-        line = Line(-INFANTRY_SQUAD_TOTAL_SHIFT, -INFANTRY_SQUAD_TOTAL_SHIFT)
         dog.move_to(-INFANTRY_SQUAD_TOTAL_SHIFT)
-        dog_dest = dog.copy().move_to(DOG_POS_FIRST_PHASE)
         line_for_brace = Line(
             -INFANTRY_SQUAD_TOTAL_SHIFT,
             -INFANTRY_SQUAD_TOTAL_SHIFT + INFANTRY_SQUAD_FIRST_SHIFT,
         )
         squad_marker_next_b = Brace(line_for_brace, direction=LEFT, buff=2)
-        # TODO divide text and proper translate it
-        text_with_t1_text = MarkupText("1*(t<sub>1</sub>          )").next_to(
+        text_with_t1_text = MarkupText("1*t<sub>1</sub>").next_to(
             squad_marker_next_b, LEFT
         )
         self.play(
             Transform(infantry_squad, INFANTRY_SQUAD_FIRST_PHASE),
-            Transform(line, s1_line.set_color(WHITE)),
-            Transform(dog, dog_dest),
             Transform(squad_marker_b, squad_marker_next_b),
             ReplacementTransform(t1_plus_t2_text, text_with_t1_text),
             run_time=2,
         )
+        self.wait()
+
+        squad_line = Line(infantry_squad.get_bottom(), infantry_squad.get_top())
+        squad_line_b = Brace(squad_line, direction=LEFT, buff=2).set_color(GREEN)
+        one_text = Text("1").next_to(squad_line_b, LEFT).set_color(GREEN)
+        t1_alone_text = MarkupText("t<sub>1</sub>").next_to(squad_marker_next_b, LEFT)
+        self.play(
+            FadeIn(squad_line_b, one_text),
+            ReplacementTransform(text_with_t1_text, t1_alone_text),
+        )
+        self.wait()
+
+        s1_b.set_color(WHITE)
+        one_next_text = one_text.copy().next_to(s1_b, LEFT, buff=0.3)
+        t1_alone_next_text = MarkupText("t<sub>1</sub> + ").next_to(s1_b, LEFT, buff=1)
+        self.play(
+            Transform(squad_line_b, s1_b),
+            Transform(squad_marker_b, s1_b),
+            ReplacementTransform(one_text, one_next_text),
+            ReplacementTransform(t1_alone_text, t1_alone_next_text),
+        )
+        self.wait()
+
+        s1_text = MarkupText("s<sub>1</sub> = t<sub>1</sub> + 1").next_to(s1_b, LEFT)
+        self.play(FadeOut(one_next_text, t1_alone_next_text), FadeIn(s1_text))
+        self.wait()
+        self.clear()
+
+        """MATH"""
+        self.next_section("Math")
+
+        self.add(Text("MATH"))
+        self.wait()
+        self.clear()
+
+        # TODO
+        # 
+        self.wait()
+
+        """SOLUTION"""
+        self.next_section("Solution", skip_animations=True)
+
+        infantry_squad.shift(INFANTRY_SQUAD_SECOND_SHIFT)
+        dog.shift(INFANTRY_SQUAD_TOTAL_SHIFT)
+        s1_text = Text("1.71").next_to(s1_b, LEFT)
+        s2_line = Line(ORIGIN, DOG_POS_FIRST_PHASE)
+        s2_b = Brace(s2_line, direction=RIGHT, buff=2)
+        s2_text = Text("0.71").next_to(s2_b, RIGHT)
+        g.remove(question_text)
+        self.add(SQUAD_MARKER, infantry_squad, s1_b, s2_b, s1_text, s2_text, g)
+        self.wait()
+
+        answer_text = Text("DISTANCE = 2.42").scale(2).set_color(RED).shift(1.5 * DOWN)
+        self.play(FadeIn(answer_text))
         self.wait()
 
 
