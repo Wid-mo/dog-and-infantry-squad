@@ -250,9 +250,130 @@ class DogAndInfantrySquad(Scene):
         self.wait()
         self.clear()
 
-        # TODO
-        # 
+        lines = VGroup(
+            MathTex(r"V_d", " = ", r"V_d"),
+            MathTex(r"{s_1", r"\over ", r"{t_1}}", " = ", r"{s_2", "\over", r"t_2}"),
+            MathTex(r"{s_1", r"\over ", r"{t_1}}", " = ", r"{s_1-1", "\over", r"t_2}"),
+            MathTex(r"{s_1", r"\over ", r"{t_1}}", " = ", r"{s_1-1", "\over", r"1 - t_1}"),
+            MathTex(r"{t_1 + 1", r"\over ", r"{t_1}}", " = ", r"{t_1+1-1", "\over", r"1 - t_1}"),
+            MathTex(r"{t_1 + 1", r"\over ", r"{t_1}}", " = ", r"{t_1", "\over", r"1 - t_1}"),
+            MathTex(r"{t + 1", r"\over ", r"{t}}", " = ", r"{t", "\over", r"1 - t}"),
+            MathTex(r"t^2", " = ", r"(t + 1)", r"(1-t)"),
+            MathTex(r"t^2", " = ", r"-(t + 1)", r"(t - 1)"),
+            MathTex(r"t^2", " = ", r"-(t^2 - 1^2)"),
+            MathTex(r"2t^2", " = ", r"1"),
+            MathTex(r"t", " = ", r"\frac{\sqrt2}{2}"),
+            MathTex(r"t_1", r" \approx ", r"71\%"),
+            MathTex(r"s_1", " + ", r"s_2", " = ", "?"),
+            MathTex(r"(t_1 + 1)", " + ", r"(s_1 - 1)"),
+            MathTex(r"(t_1 + 1)", " + ", r"(t_1 + 1 - 1)"),
+            MathTex(r"(\frac{\sqrt2}{2} + 1)", " + ", r"(\frac{\sqrt2}{2})"),
+        ).scale(2)
+        self.play(Write(lines[0]))
         self.wait()
+        for pr, nx in zip(lines[:-1], lines[1:]):
+            self.play(ReplacementTransform(pr, nx))
+            self.wait()
+
+        # show braces
+        # show solution
+            
+        # self.play(ReplacementTransform(lines[0], lines[1]))
+        # self.wait()
+        # self.play(TransformMatchingTex(lines[1], lines[2]))
+        # self.wait()
+
+        # TexMObject
+        # VMobject
+        # test = MathTex(r"\frac{1}{2} = \frac{2}{4}")
+        # self.add(test.get_pieces(4))
+        # self.wait()
+
+        # # TODO
+
+        # previous_equation = MathTex("V_d = V_d")
+        # self.add(previous_equation)
+        # self.wait()
+
+        # next_equation = MathTex(r"\frac{s_1}{t_1}", " = " ,r"\frac{s_2}{t_2}")
+        # self.play(
+        # TransformMatchingTex(next_equation, MathTex(r"\frac{t_1-1}{t_1}", " = " ,r"\frac{s_2}{t_2}")),
+        # run_time=3
+        # )
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex(
+        #     "\\frac{t_1+1}{t_1} = \\frac{s_1-1}{1-t_1}"
+        # )
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex(
+        #     "\\frac{t_1+1}{t_1} = \\frac{t_1+1-1}{1-t_1}"
+        # )
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex(
+        #     "\\frac{t_1+1}{t_1} = \\frac{t_1}{1-t_1}"
+        # )
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex(
+        #     "\\frac{t+1}{t} = \\frac{t}{1-t}"
+        # )
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex("t^2 = (t+1)(1-t)")
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex("t^2 = -(t+1)(t-1)")
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex("t^2 = -(t^2-1^2)")
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex("2t^2 = 1")
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex(
+        #     "t = \\frac{\\sqrt2}{2}"
+        # )
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex(r"t_1 \approx 71\%")
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # previous_equation, next_equation = next_equation, MathTex("s_1 + s_2 = ?")
+        # self.play(ReplacementTransform(previous_equation, next_equation))
+        # self.wait()
+
+        # equations = [
+        #     "\\frac{t_1+1}{t_1} = \\frac{s_1-1}{1-t_1}",
+        #     "\\frac{t_1+1}{t_1} = \\frac{t_1+1-1}{1-t_1}",
+        #     "\\frac{t_1+1}{t_1} = \\frac{t_1}{1-t_1}",
+        #     "\\frac{t+1}{t} = \\frac{t}{1-t}",
+        #     "t^2 = (t+1)(1-t)",
+        #     "t^2 = -(t+1)(t-1)",
+        #     "t^2 = -(t^2-1^2)",
+        #     "2t^2 = 1",
+        #     "t = \\frac{\\sqrt2}{2}",
+        #     r"t_1 \approx 71\%",
+        #     "s_1 + s_2 = ?",
+        #     "(t_1 + 1) + (s_1 -1)",
+        #     "(t_1 + 1) + (t_1+1-1)",
+        #     "(t_1 + 1) + (t_1)",
+        #     "(\\frac{\\sqrt2}{2} + 1) + (\\frac{\\sqrt2}{2})",
+        # ]
 
         """SOLUTION"""
         self.next_section("Solution", skip_animations=True)
