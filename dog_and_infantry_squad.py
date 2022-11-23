@@ -250,33 +250,16 @@ class DogAndInfantrySquad(Scene):
         self.wait()
         self.clear()
 
-        kw = {substrings_to_isolate: ["\over", "="]}
+        fe = {"substrings_to_isolate": ["\over", "="]}
+        e = {"substrings_to_isolate": "+"}
         lines = VGroup(
             MathTex(r"V_d = V_d", substrings_to_isolate="="),
-            MathTex(
-                r"{s_1 \over {t_1}} = {s_2 \over t_2}",
-                **kw,
-            ),
-            MathTex(
-                r"{s_1 \over {t_1}} = {s_1 - 1 \over t_2}",
-                **kw,
-            ),
-            MathTex(
-                r"{s_1 \over {t_1}} = {s_1 - 1 \over 1 - t_1}",
-                substrings_to_isolate=["\over", "="],
-            ),
-            MathTex(
-                r"{t_1 + 1 \over {t_1}} = {t_1+1-1 \over 1 - t_1}",
-                substrings_to_isolate=["\over", "="],
-            ),
-            MathTex(
-                r"{t_1 + 1 \over {t_1}} = {t_1 \over 1 - t_1}",
-                substrings_to_isolate=["\over", "="],
-            ),
-            MathTex(
-                r"{t + 1 \over {t}} = {t \over 1 - t}",
-                substrings_to_isolate=["\over", "="],
-            ),
+            MathTex(r"{s_1 \over {t_1}} = {s_2 \over t_2}", **fe),
+            MathTex(r"{s_1 \over {t_1}} = {s_1 - 1 \over t_2}", **fe),
+            MathTex(r"{s_1 \over {t_1}} = {s_1 - 1 \over 1 - t_1}", **fe),
+            MathTex(r"{t_1 + 1 \over {t_1}} = {t_1+1-1 \over 1 - t_1}", **fe),
+            MathTex(r"{t_1 + 1 \over {t_1}} = {t_1 \over 1 - t_1}", **fe),
+            MathTex(r"{t + 1 \over {t}} = {t \over 1 - t}", **fe),
             MathTex(r"t^2 = (t+1)(1-t)", substrings_to_isolate="="),
             MathTex(r"t^2 = -(t + 1)(t - 1)", substrings_to_isolate="="),
             MathTex(r"t^2 = -(t^2 - 1^2)", substrings_to_isolate="="),
@@ -287,10 +270,7 @@ class DogAndInfantrySquad(Scene):
             MathTex(r"s_1 + s_2 = ?", substrings_to_isolate=["+", "="]),
             MathTex(r"(t_1 + 1) + (s_1 - 1)", substrings_to_isolate="+"),
             MathTex(r"(t_1 + 1) + (t_1 + 1 - 1)", substrings_to_isolate="+"),
-            MathTex(
-                r"(\frac{\sqrt2}{2} + 1) + (\frac{\sqrt2}{2})",
-                substrings_to_isolate="+",
-            ),
+            MathTex(r"(\frac{\sqrt2}{2} + 1) + (\frac{\sqrt2}{2})", **e),
         ).scale(2)
         self.play(Write(lines[0]))
         self.wait()
