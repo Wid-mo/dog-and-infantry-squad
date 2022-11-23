@@ -250,15 +250,16 @@ class DogAndInfantrySquad(Scene):
         self.wait()
         self.clear()
 
+        kw = {substrings_to_isolate: ["\over", "="]}
         lines = VGroup(
             MathTex(r"V_d = V_d", substrings_to_isolate="="),
             MathTex(
                 r"{s_1 \over {t_1}} = {s_2 \over t_2}",
-                substrings_to_isolate=["\over", "="],
+                **kw,
             ),
             MathTex(
                 r"{s_1 \over {t_1}} = {s_1 - 1 \over t_2}",
-                substrings_to_isolate=["\over", "="],
+                **kw,
             ),
             MathTex(
                 r"{s_1 \over {t_1}} = {s_1 - 1 \over 1 - t_1}",
