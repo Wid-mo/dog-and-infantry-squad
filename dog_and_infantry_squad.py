@@ -252,45 +252,61 @@ class DogAndInfantrySquad(Scene):
 
         fe = {"substrings_to_isolate": ["\over", "="]}
         e = {"substrings_to_isolate": "+"}
-        lines = VGroup(
-            MathTex(r"V_d = V_d", substrings_to_isolate="="),
-            MathTex(r"{s_1 \over {t_1}} = {s_2 \over t_2}", **fe),
-            MathTex(r"{s_1 \over {t_1}} = {s_1 - 1 \over t_2}", **fe),
-            MathTex(r"{s_1 \over {t_1}} = {s_1 - 1 \over 1 - t_1}", **fe),
-            MathTex(r"{t_1 + 1 \over {t_1}} = {t_1+1-1 \over 1 - t_1}", **fe),
-            MathTex(r"{t_1 + 1 \over {t_1}} = {t_1 \over 1 - t_1}", **fe),
-            MathTex(r"{t + 1 \over {t}} = {t \over 1 - t}", **fe),
-            MathTex(r"t^2 = (t+1)(1-t)", substrings_to_isolate="="),
-            MathTex(r"t^2 = -(t + 1)(t - 1)", substrings_to_isolate="="),
-            MathTex(r"t^2 = -(t^2 - 1^2)", substrings_to_isolate="="),
-            MathTex(r"t^2 = -t^2 + 1", substrings_to_isolate="="),
-            MathTex(r"2t^2 = 1", substrings_to_isolate="="),
-            MathTex(r"t = \frac{\sqrt2}{2}", substrings_to_isolate="="),
-            MathTex(r"t_1 \approx 71\%"),
-            MathTex(r"s_1 + s_2 = ?", substrings_to_isolate=["+", "="]),
-            MathTex(r"(t_1 + 1) + (s_1 - 1)", substrings_to_isolate="+"),
-            MathTex(r"(t_1 + 1) + (t_1 + 1 - 1)", substrings_to_isolate="+"),
-            MathTex(r"(\frac{\sqrt2}{2} + 1) + (\frac{\sqrt2}{2})", **e),
-        ).scale(2)
-        self.play(Write(lines[0]))
-        self.wait()
-        for pr, nx in zip(lines[:-1], lines[1:]):
-            self.play(ReplacementTransform(pr, nx))
-            self.wait()
-
-        # tex1 = MathTex(r"{{{t_1 + 1}} {{\over}} {{t_1}}} {{=}} {{{t_1}} {{\over}} 1 - {{t_1}}}")
-        # self.add(Text(str(len(tex1))))
-        # tex2 = MathTex(r"{t + 1", r"\over ", r"{t}}", " = ", r"{t", "\over", r"1 - t}")
-        # tex1 = MathTex(
-        #     r"{t_1 + 1 \over {t_1}} = {t_1 \over 1 - t_1}",
-        #     substrings_to_isolate=["t_1+1", "\over", "t_1", "=", "1-t_1"],
-        # )
-        # tex1[3].set_color(RED)
-        # self.add(tex1)
-
-        # self.play(LaggedStart(*[FadeOut(a) for a in tex1], lag_ratio=0.6), run_time=10)
+        # lines = VGroup(
+        #     MathTex(r"V_d = V_d", substrings_to_isolate="="),
+        #     MathTex(r"{s_1 \over {t_1}} = {s_2 \over t_2}", **fe),
+        #     MathTex(r"{s_1 \over {t_1}} = {s_1 - 1 \over t_2}", **fe),
+        #     MathTex(r"{s_1 \over {t_1}} = {s_1 - 1 \over 1 - t_1}", **fe),
+        #     MathTex(r"{t_1 + 1 \over {t_1}} = {t_1+1-1 \over 1 - t_1}", **fe),
+        #     MathTex(r"{t_1 + 1 \over {t_1}} = {t_1 \over 1 - t_1}", **fe),
+        #     MathTex(r"{t + 1 \over {t}} = {t \over 1 - t}", **fe),
+        #     MathTex(r"t^2 = (t+1)(1-t)", substrings_to_isolate="="),
+        #     MathTex(r"t^2 = -(t + 1)(t - 1)", substrings_to_isolate="="),
+        #     MathTex(r"t^2 = -(t^2 - 1^2)", substrings_to_isolate="="),
+        #     MathTex(r"t^2 = -t^2 + 1", substrings_to_isolate="="),
+        #     MathTex(r"2t^2 = 1", substrings_to_isolate="="),
+        #     MathTex(r"t = \frac{\sqrt2}{2}", substrings_to_isolate="="),
+        #     MathTex(r"t_1 \approx 71\%"),
+        #     MathTex(r"s_1 + s_2 = ?", substrings_to_isolate=["+", "="]),
+        #     MathTex(r"(t_1 + 1) + (s_1 - 1)", substrings_to_isolate="+"),
+        #     MathTex(r"(t_1 + 1) + (t_1 + 1 - 1)", substrings_to_isolate="+"),
+        #     MathTex(r"(\frac{\sqrt2}{2} + 1) + (\frac{\sqrt2}{2})", **e),
+        # ).scale(2)
+        # self.play(Write(lines[0]))
         # self.wait()
+        # for pr, nx in zip(lines[:-1], lines[1:]):
+        #     self.play(ReplacementTransform(pr, nx))
+        #     self.wait()
 
+
+        # tex1 = MathTex("{", r"t_1+1", r"\over", r"t_1", "}", "=", "{", r"t_1", r"\over", r"1-t_1", "}")
+        tex1 = MathTex(r"{t_1+1 \over t_1 } = {t_1 \over 1-t_1 }", substrings_to_isolate=["{", "t_1+1", "\over", "t_1", "}", "=", "1-t_1"])
+        # tex2 = MathTex("{", r"t+1", r"\over", "t", "}", "=", "{", "t", r"\over", r"1-t", "}")
+        tex2 = MathTex(r"{t+1 \over t } = {t \over 1-t }", substrings_to_isolate=["{", "t+1", "\over", "t", "}", "=", "1-t"])
+        self.play(LaggedStart(*[FadeIn(t) for t in tex1], lag_ratio=0.9), run_time=6)
+        self.play(
+            TransformMatchingTex(
+                tex1, tex2, path_arc=90 * DEGREES
+            )
+        )
+
+
+        # tex1 = MathTex(
+        #     "{", "t+1", r"\over", "t", "}", "=", "{", "t", r"\over", "1-t", "}"
+        # )
+        # self.play(LaggedStart(*[FadeIn(t) for t in tex1], lag_ratio=0.9), run_time=6)
+        # tex2 = MathTex(r"t^2", "=", "(", "t+1", ")", "(", "1-t", ")")
+        # self.play(
+        #     TransformMatchingTex(
+        #         tex1, tex2, path_arc=90 * DEGREES, key_map={"t": "t^2"}
+        #     )
+        # )
+
+
+
+
+
+       
         # lines_to_up = lines[-1].copy().shift(UP)
         # self.play(ReplacementTransform(lines[-1], lines_to_up))
         # b1 = Brace(lines[-1][0], direction=DOWN, buff=1)
