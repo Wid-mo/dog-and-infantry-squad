@@ -279,20 +279,20 @@ class DogAndInfantrySquad(Scene):
         #     self.play(ReplacementTransform(pr, nx))
         #     self.wait()
 
-        # define animation
-        # transitions: tuple[Animation] = (
-        #     TransformMatchingTex(eq[0], eq[1], key_map={"V_1": "s_1", "V_2": "s_2"}),
-        #     ReplacementTransform(eq[1], eq[2]),
+        # transitions_data = (
+        #     {"name": "TransformMatchingTex", "key_map": {"V_1": "s_1", "V_2": "s_2"}},
+        #     {"name": "ReplacementTransform"}
         # )
+
+        # transitions = (createAnim(anim["name"], eq[i], eq[i+1], anim.get("key_map")) for i, anim in enumerate(transitions_data))
         transitions_data = (
-            # ("TransformMatchingTex", {"key_map": {"V_1": "s_1", "V_2": "s_2"}}),
-            # ("ReplacementTransform"),
-            {"name": "TransformMatchingTex", "key_map": {"V_1": "s_1", "V_2": "s_2"}},
-            {"name": "ReplacementTransform"}
+            ("TransformMatchingTex", {"V_1": "s_1", "V_2": "s_2"}),
+            ("ReplacementTransform"),
         )
-
-        transitions = (createAnim(anim["name"], eq[i], eq[i+1], anim.get("key_map")) for i, anim in enumerate(transitions_data))
-
+        transitions = (
+            createAnim(name, eq[i], eq[i + 1], key_map)
+            for i, name, key_map in enumerate(transitions_data)
+        )
 
         def createAnim(anim: str, src: Mobject, dest: Mobject, key_map=""):
             return (
@@ -300,8 +300,6 @@ class DogAndInfantrySquad(Scene):
                 if anim == "TransformMatchingTex"
                 else ReplacementTransform(src, dest)
             )
-
-
 
         # transitions: tuple[Animation] = (makeAnim(pr, nx) for pr, nx in zip(eq[:-1], eq[1:]))
         # transitions = (
