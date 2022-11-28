@@ -250,167 +250,139 @@ class DogAndInfantrySquad(Scene):
         self.wait()
         self.clear()
 
-        # fe = {"substrings_to_isolate": ["\over", "="]}
-        # e = {"substrings_to_isolate": "+"}
-        # fmt: off
-        # equations
-        # eq = VGroup(
-        #     MathTex(r"V_1 = V_2", substrings_to_isolate=["V_1", "=", "V_2"]),
-        #     MathTex(r"{s_1 \over t_1} = {s_2 \over t_2}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_2", "t_2"]),
-        #     MathTex(r"{s_1 \over t_1} = {s_1-1 \over t_2}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1", "t_2"]),
-        #     MathTex(r"{s_1 \over t_1} = {s_1-1 \over 1-t_1}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1","1-t_1"]),
-        #     MathTex(r"{t_1+1 \over t_1} = {t_1+1-1 \over 1-t_1}", substrings_to_isolate=["{", "t_1+1", "\over", "t_1", "}", "=", "+1-1", "1-t_1"]),
-        #     MathTex(r"{t_1+1 \over t_1} = {t_1 \over 1-t_1}", substrings_to_isolate=["{", "t_1+1", "\over", "t_1", "}", "=", "1-t_1"]),
-        #     MathTex(r"{t_1+1 \over t_1} = {t_1 \over 1-t_1}", substrings_to_isolate=["{", "t_1", "+1", "\over", "t_1", "}", "=", "1-", "t_1"]),
-        #     MathTex(r"{t+1 \over t } = {t \over 1-t }", substrings_to_isolate=["{", "t", "+1", "\over", "t", "}", "=", "1-", "t"]),
-        #     MathTex("{", "t+1", r"\over", "t", "}", "=", "{", "t", r"\over", "1-t", "}"),
-        #     MathTex(r"t^2 = (t+1)(1-t)", substrings_to_isolate="="),
-        #     MathTex(r"t^2 = -(t + 1)(t - 1)", substrings_to_isolate="="),
-        #     MathTex(r"t^2 = -(t^2 - 1^2)", substrings_to_isolate="="),
-        #     MathTex(r"t^2 = -t^2 + 1", substrings_to_isolate="="),
-        #     MathTex(r"2t^2 = 1", substrings_to_isolate="="),
-        #     MathTex(r"t = \frac{\sqrt2}{2}", substrings_to_isolate="="),
-        #     MathTex(r"t_1 \approx 71\%"),
-        #     MathTex(r"s_1 + s_2 = ?", substrings_to_isolate=["+", "="]),
-        #     MathTex(r"(t_1 + 1) + (s_1 - 1)", substrings_to_isolate="+"),
-        #     MathTex(r"(t_1 + 1) + (t_1 + 1 - 1)", substrings_to_isolate="+"),
-        #     MathTex(r"(\frac{\sqrt2}{2} + 1) + (\frac{\sqrt2}{2})", **e),
-        # ).scale(2)
-        # fmt: on
-
         # fmt: off
 
-        self.play(Write(MathTex("V_1 = V_2").scale(2)))
-        self.wait()
-        self.clear()
+        # self.play(Write(MathTex("V_1 = V_2").scale(2)))
+        # self.wait()
+        # self.clear()
 
-        pr = MathTex(r"V_1 = V_2", substrings_to_isolate=["V_1", "=", "V_2"]).scale(2)
-        nx = MathTex(
-            r"{s_1 \over t_1} = {s_2 \over t_2}",
-            substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_2", "t_2"],
-        )
-        nx.scale(2)
-        self.play(TransformMatchingTex(pr, nx, key_map={"V_1": "s_1", "V_2": "s_2"}))
-        self.wait()
+        # pr = MathTex(r"V_1 = V_2", substrings_to_isolate=["V_1", "=", "V_2"]).scale(2)
+        # nx = MathTex(
+        #     r"{s_1 \over t_1} = {s_2 \over t_2}",
+        #     substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_2", "t_2"],
+        # )
+        # nx.scale(2)
+        # self.play(TransformMatchingTex(pr, nx, key_map={"V_1": "s_1", "V_2": "s_2"}))
+        # self.wait()
 
+        # pr = nx
+        # nx = MathTex(r"{s_1 \over t_1} = {s_1-1 \over t_2}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1", "t_2"])
+        # nx.scale(2)
+        # self.play(ReplacementTransform(pr, nx))
+        # self.wait()
+
+        # pr = nx
+        # nx = MathTex(r"{s_1 \over t_1} = {s_1-1 \over 1-t_1}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1","1-t_1"])
+        # nx.scale(2)
+        # self.play(ReplacementTransform(pr, nx))
+        # self.wait()
+
+        # pr = nx
+        # nx = MathTex(r"{t_1+1 \over t_1} = {t_1+1-1 \over 1-t_1}", substrings_to_isolate=["{", "t_1+1", "\over", "t_1", "}", "=", "+1-1", "1-t_1"])
+        # nx.scale(2)
+        # self.play(ReplacementTransform(pr, nx))
+        # self.wait()
+
+        # pr = nx
+        # nx = MathTex(r"{t_1+1 \over t_1} = {t_1 \over 1-t_1}", substrings_to_isolate=["{", "t_1+1", "\over", "t_1", "}", "=", "1-t_1"])
+        # nx.scale(2)
+        # self.play(ReplacementTransform(pr, nx))
+        # self.wait()
+        # self.remove(nx)
+
+        # pr = MathTex(r"{t_1+1 \over t_1 } = {t_1 \over 1-t_1 }", substrings_to_isolate=["{", "t_1", "+1", "\over", "t_1", "}", "=", "1-", "t_1"])
+        # pr.scale(2)
+        # nx = MathTex(r"{t+1 \over t } = {t \over 1-t }", substrings_to_isolate=["{", "t", "+1", "\over", "t", "}", "=", "1-", "t"])
+        # nx.scale(2)
+        # self.play(TransformMatchingTex(pr, nx, path_arc=90 * DEGREES, transform_mismatches=True))
+        # self.wait()
+        # self.remove(nx)
+
+        # pr = MathTex(r"{t+1 \over t} = {t \over 1-t}", substrings_to_isolate=["{", "t+1", "\over", "t", "}", "=", "1-t"])
+        # pr.scale(2)
+        # nx = MathTex(r"t^2 = (t+1)(1-t)", substrings_to_isolate=["t^2", "=", "(", "t+1", ")", "1-t"])
+        # nx.scale(2)
+        # self.play(TransformMatchingTex(pr, nx, path_arc=90 * DEGREES, key_map={"t": "t^2"}))
+        # self.wait()
+        # self.remove(nx)
+
+        # pr = MathTex(r"t^2 = (t+1)(1-t)", substrings_to_isolate=["t^2", "=", "(t+1)", "(", "1", "-", "t", ")"])
+        # pr.scale(2)
+        # nx = MathTex(r"t^2 = -(t+1)(t-1)", substrings_to_isolate=["t^2", "=", "-", "(t+1)", "t", "1"])
+        # nx.scale(2)
+        # self.play(TransformMatchingTex(pr, nx, path_arc=90 * DEGREES))
+        # self.wait()
+        # self.remove(nx)
+
+        # pr = MathTex(r"t^2 = -(t+1)(t-1)", substrings_to_isolate=["t^2 = ", "-", "t", "1"])
+        # pr.scale(2)
+        # nx = MathTex(r"t^2 = -(t^2 - 1^2)", substrings_to_isolate=["t^2 = ", "-", "t^2", "1^2", "(", ")"])
+        # nx.scale(2)
+        # self.play(TransformMatchingTex(pr, nx, path_arc=90 * DEGREES, key_map={"t": "t^2", "1": "1^2"}))
+        # self.wait()
+
+        # pr = nx
+        # nx = MathTex(r"t^2 = -t^2 + 1", substrings_to_isolate=["t^2 = ", "-", "t^2", "+", "1"])
+        # nx.scale(2)
+        # self.play(TransformMatchingTex(pr, nx, path_arc=90 * DEGREES, key_map={"1^2": "1"}))
+        # self.wait()
+
+        # to del
+        nx = MathTex(r"t^2 = -t^2 + 1", substrings_to_isolate=["t^2 = ", "-", "t^2", "+", "1"]).scale(2)
         pr = nx
-        nx = MathTex(r"{s_1 \over t_1} = {s_1-1 \over t_2}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1", "t_2"])
+        nx = MathTex(r"2t^2 = 1", substrings_to_isolate=["2t^2", "=", "1"])
         nx.scale(2)
         self.play(ReplacementTransform(pr, nx))
         self.wait()
+        self.remove(nx)
+
+        pr = MathTex(r"2t^2 = 1", substrings_to_isolate=["2", "t", "^2", "=", "1"]).scale(2)
+        nx = MathTex(r"{{t}} = {\sqrt2 \over {{2}}}", substrings_to_isolate=["=", "{", "}", "\sqrt2"]) # I can't add 't' to isolate because \sqrt
+        nx.scale(2)
+        self.play(TransformMatchingTex(pr, nx, path_arc=90 * DEGREES, key_map={"^2": "\sqrt2"}))
+        self.wait()
+        self.remove(nx)
 
         pr = nx
-        nx = MathTex(r"{s_1 \over t_1} = {s_1-1 \over 1-t_1}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1","1-t_1"])
-        nx.scale(2)
+        nx = MathTex(r"{{t}}_1 \approx 71\%").scale(2)
         self.play(ReplacementTransform(pr, nx))
         self.wait()
-
-        pr = nx
-        nx = MathTex(r"{t_1+1 \over t_1} = {t_1+1-1 \over 1-t_1}", substrings_to_isolate=["{", "t_1+1", "\over", "t_1", "}", "=", "+1-1", "1-t_1"])
-        nx.scale(2)
-        self.play(ReplacementTransform(pr, nx))
-        self.wait()
-
-        pr = nx
-        nx = MathTex(r"{t_1+1 \over t_1} = {t_1 \over 1-t_1}", substrings_to_isolate=["{", "t_1+1", "\over", "t_1", "}", "=", "1-t_1"])
-        nx.scale(2)
-        self.play(ReplacementTransform(pr, nx))
-        self.wait()
-
-        # replacemect
-
-
 
         self.play(FadeOut(nx))
+        pr = MathTex(r"s_1 + s_2 {{= ?}}").scale(2)
+        self.play(Write(pr))
+        self.wait()
+
+        nx = MathTex(r"s_1 + s_2").scale(2)
+        self.play(ReplacementTransform(pr, nx))
+        self.wait(0.5)
+        self.remove(nx)
+
+        pr = MathTex(r"s_1 + s_2", substrings_to_isolate=["s_1", "s_2"]).scale(2)
+        nx = MathTex(r"(t_1 + 1) + (s_1 - 1)", substrings_to_isolate=["(t_1 + 1)", "(s_1 - 1)"]).scale(2)
+        self.play(ReplacementTransform(pr, nx))
+        self.wait()
+        self.remove(nx)
+
+        pr = MathTex(r"(t_1 + 1) + ({{s_1}} - 1)").scale(2)
+        nx = MathTex(r"(t_1 + 1) + ({{t_1 + 1}} - 1)").scale(2)
+        self.play(ReplacementTransform(pr, nx))
+        self.wait()
+        self.remove(nx)
+
+        pr = MathTex(r"(t_1 + 1) + ({{t_1 + 1 - 1}})").scale(2)
+        nx = MathTex(r"(t_1 + 1) + ({{t_1}})").scale(2)
+        self.play(ReplacementTransform(pr, nx))
+        self.wait()
+        self.remove(nx)
+
+        pr = MathTex(r"({{t_1}} + 1) + ({{t_1}})").scale(2)
+        nx = MathTex(r"({{\frac{\sqrt2}{2}}} + 1) + ({{\frac{\sqrt2}{2}}})")
+        nx.scale(2)
+        self.play(ReplacementTransform(pr, nx))
+        self.wait()
 
         # fmt: on
-
-        # i = 0
-        # self.play(*[Write(e) for e in eq[i]])  # V_1 = V_2
-        # self.wait()
-        # self.play(TransformMatchingTex(eq[i], eq[i+1], key_map={"V_1": "s_1", "V_2": "s_2"})); i += 1
-        # self.wait()
-        # self.play(ReplacementTransform(eq[i], eq[i+1])); i += 1
-        # self.wait()
-        # self.play(ReplacementTransform(eq[i], eq[i+1])); i += 1
-        # self.wait()
-        # self.play(ReplacementTransform(eq[i], eq[i+1])); i += 1
-        # self.wait()
-        # self.play(ReplacementTransform(eq[i], eq[i+1])); i += 1
-
-        # eq[6].replace(eq[5])
-        # self.play(
-        #     TransformMatchingTex(
-        #         eq[6], eq[7], path_arc=90 * DEGREES, transform_mismatches=True
-        #     )
-        # )
-        # self.wait()
-
-        # transitions_data: tuple[str, dict | None] = (
-        #     ("TransformMatchingTex", {"V_1": "s_1", "V_2": "s_2"}),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None), # TransformMatchingTex(tex1, tex2, path_arc=90 * DEGREES, transform_mismatches=True)
-        #     ("ReplacementTransform", None), # TransformMatchingTex(tex1, tex2, path_arc=90 * DEGREES, key_map={"t": "t^2"})
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        #     ("ReplacementTransform", None),
-        # )
-        # transitions = (
-        #     createAnim(name, eq[i], eq[i + 1], key_map)
-        #     for i, (name, key_map) in enumerate(transitions_data)
-        # )
-
-        # def createAnim(
-        #     anim: str, src: Mobject, dest: Mobject, key_map: dict
-        # ) -> Animation:
-        #     return (
-        #         TransformMatchingTex(src, dest, key_map=key_map)
-        #         if anim == "TransformMatchingTex"
-        #         else ReplacementTransform(src, dest)
-        #     )
-
-        # self.play(*[Write(e) for e in eq[0]])
-        # self.wait()
-
-        # for transition in transitions:
-        #     self.play(transition)
-        #     self.wait()
-
-        # tex1, tex2 = MathTex(r"{s_1 \over t_1} = {s_1-1 \over t_2}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1", "t_2"]), MathTex(r"{s_1 \over t_1} = {s_1-1 \over 1-t_1}", substrings_to_isolate=["{", "s_1", "\over", "t_1", "}", "=", "s_1-1","1-t_1"])
-        # self.add(tex1)
-        # self.wait()
-        # self.play(TransformMatchingTex(tex1, tex2, path_arc=90* DEGREES))
-        # self.wait()
-
-        # tex1 = MathTex(r"{t_1+1 \over t_1 } = {t_1 \over 1-t_1 }", substrings_to_isolate=["{", "t_1", "+1", "\over", "t_1", "}", "=", "1-", "t_1"])
-        # tex2 = MathTex(r"{t+1 \over t } = {t \over 1-t }", substrings_to_isolate=["{", "t", "+1", "\over", "t", "}", "=", "1-", "t"])
-        # self.add(tex1)
-        # self.play(
-        #     TransformMatchingTex(
-        #         tex1, tex2, path_arc=90 * DEGREES, transform_mismatches=True
-        #     )
-        # )
-
-        # tex1 = MathTex(
-        #     "{", "t+1", r"\over", "t", "}", "=", "{", "t", r"\over", "1-t", "}"
-        # )
-        # self.play(LaggedStart(*[FadeIn(t) for t in tex1], lag_ratio=0.9), run_time=6)
-        # tex2 = MathTex(r"t^2", "=", "(", "t+1", ")", "(", "1-t", ")")
-        # self.play(
-        #     TransformMatchingTex(
-        #         tex1, tex2, path_arc=90 * DEGREES, key_map={"t": "t^2"}
-        #     )
-        # )
 
         # lines_to_up = lines[-1].copy().shift(UP)
         # self.play(ReplacementTransform(lines[-1], lines_to_up))
