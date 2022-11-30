@@ -45,7 +45,7 @@ where:
 
 ### $t_1$ and $t_2$ into $t$.  
 First and second phase of movement (t_1 + t_2) last 1 unit of time.  
-Variable $t$ is time of movement in pirst phase.  
+Variable $t$ is time of movement in first phase.  
 So:
 
     t_1 = t 
