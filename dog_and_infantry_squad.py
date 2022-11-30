@@ -4,7 +4,7 @@ from manim import *
 class DogAndInfantrySquad(Scene):
     def construct(self):
         """INTRODUCTION"""
-        self.next_section("Introduction", skip_animations=True)
+        self.next_section("Introduction", skip_animations=False)
 
         infantry_squad = Square(
             side_length=3, color=GREEN, fill_opacity=0.3, stroke_color=GREEN
@@ -66,10 +66,10 @@ class DogAndInfantrySquad(Scene):
         self.clear()
 
         """CUES 1/3"""
-        self.next_section("Cues 1 / 3", skip_animations=True)
+        self.next_section("Cues 1 / 3", skip_animations=False)
 
         self.add(Text("PAUSE"), Text("and try to solve").shift(DOWN))
-        self.wait(duration=3)
+        self.wait(duration=2)
         self.clear()
         self.add(Text("CUES 1 / 3"))
         self.wait(duration=1)
@@ -123,7 +123,7 @@ class DogAndInfantrySquad(Scene):
         self.clear()
 
         """CUES 2/3"""
-        self.next_section("Cues 2/3", skip_animations=True)
+        self.next_section("Cues 2/3", skip_animations=False)
 
         self.add(Text("CUES 2 / 3"))
         self.wait(duration=1)
@@ -153,7 +153,7 @@ class DogAndInfantrySquad(Scene):
 
         equals_one_text = up_equation_text[-2:].copy()
         equals_one_dest_text = equals_one_text.copy().next_to(t2_text, RIGHT)
-        minus_text = Text('-').next_to(equals_one_dest_text, RIGHT)
+        minus_text = Text("-").next_to(equals_one_dest_text, RIGHT)
         t1_text = up_equation_text[0:2].copy()
         t1_dest_text = t1_text.copy().next_to(minus_text, RIGHT)
         self.play(
@@ -178,8 +178,19 @@ class DogAndInfantrySquad(Scene):
         dog.move_to(ORIGIN)
         all_height_line = Line(-INFANTRY_SQUAD_TOTAL_SHIFT, INFANTRY_SQUAD_TOTAL_SHIFT)
         all_height_text = Text("2").next_to(all_height_line, RIGHT)
-        self.add(SQUAD_MARKER, infantry_squad, all_height_line, all_height_text)
+        s1_b.set_color(WHITE)
+        s1_text = MarkupText("s<sub>1</sub>").next_to(s1_b, LEFT)
+        self.add(
+            SQUAD_MARKER,
+            infantry_squad,
+            all_height_line,
+            all_height_text,
+            s1_b,
+            s1_text,
+        )
         self.wait()
+
+        self.play(FadeOut(s1_b, s1_text))
 
         squad_line = Line(
             infantry_squad.get_bottom(), infantry_squad.get_top()
@@ -242,8 +253,8 @@ class DogAndInfantrySquad(Scene):
         self.wait()
 
         s1_b.set_color(WHITE)
-        one_next_text = one_text.copy().next_to(s1_b, LEFT, buff=0.3)
-        t1_alone_next_text = MarkupText("t<sub>1</sub> + ").next_to(s1_b, LEFT, buff=1)
+        one_next_text = one_text.copy().next_to(s1_b, LEFT)
+        t1_alone_next_text = MarkupText("t<sub>1</sub> + ").next_to(one_next_text, LEFT)
         self.play(
             Transform(squad_line_b, s1_b),
             Transform(squad_marker_b, s1_b),
@@ -253,7 +264,6 @@ class DogAndInfantrySquad(Scene):
         self.wait()
 
         s1_text = MarkupText("s<sub>1</sub> =").next_to(t1_alone_next_text, LEFT)
-        one_next_text.set_color(WHITE)
         self.play(
             FadeIn(s1_text), one_next_text.animate.next_to(t1_alone_next_text, RIGHT)
         )
@@ -261,7 +271,7 @@ class DogAndInfantrySquad(Scene):
         self.clear()
 
         """MATH"""
-        self.next_section("Math", skip_animations=True)
+        self.next_section("Math", skip_animations=False)
 
         self.add(Text("MATH"))
         self.wait()
@@ -414,7 +424,7 @@ class DogAndInfantrySquad(Scene):
 
         sol = MathTex(r"\sqrt2 + 1").scale(2).shift(UP)
         sol_b = Brace(sol, direction=DOWN, buff=MED_LARGE_BUFF)
-        sol_b_text = MathTex(r"\approx 2.42")
+        sol_b_text = MathTex(r"\approx 2.41")
         sol_b_text.scale(2).next_to(sol_b, DOWN, buff=MED_LARGE_BUFF).set_color(RED)
         self.play(
             ReplacementTransform(nx, sol),
@@ -425,7 +435,7 @@ class DogAndInfantrySquad(Scene):
         self.clear()
 
         """SOLUTION"""
-        self.next_section("Solution", skip_animations=True)
+        self.next_section("Solution", skip_animations=False)
 
         infantry_squad.shift(INFANTRY_SQUAD_SECOND_SHIFT)
         dog.shift(INFANTRY_SQUAD_TOTAL_SHIFT)
@@ -437,9 +447,19 @@ class DogAndInfantrySquad(Scene):
         self.add(SQUAD_MARKER, infantry_squad, s1_b, s2_b, s1_text, s2_text, g)
         self.wait()
 
-        answer_text = Text("DISTANCE = 2.42").scale(2).set_color(RED).shift(1.5 * DOWN)
+        answer_text = Text("DISTANCE = 2.41").scale(2).set_color(RED).shift(1.5 * DOWN)
         self.play(FadeIn(answer_text))
         self.wait()
+        self.clear()
+
+        """FUN FACT"""
+        self.next_section("Fun fact", skip_animations=False)
+
+        self.add(
+            Text("FUN FACT").shift(UP),
+            Text("Red point is 2.41 times faster \n than green square").shift(DOWN),
+        )
+        self.wait(2)
 
 
 # manim -p -ql dog_and_infantry_squad.py DogAndInfantrySquad
