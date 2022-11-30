@@ -85,11 +85,7 @@ class DogAndInfantrySquad(Scene):
         dog.move_to(DOG_POS_FIRST_PHASE)
         infantry_squad.shift(-INFANTRY_SQUAD_SECOND_SHIFT)
         s2_line = Line(DOG_POS_FIRST_PHASE, ORIGIN)
-        s2_b = Brace(
-            s2_line,
-            direction=s2_line.copy().rotate(-PI / 2).get_unit_vector(),
-            buff=2,
-        )
+        s2_b = Brace(s2_line, direction=RIGHT, buff=2)
         s2_text = MarkupText("s<sub>2</sub>").next_to(s2_b, RIGHT)
         self.add(SQUAD_MARKER, infantry_squad, s1_line, dog, s2_b, s2_text)
         self.wait()
@@ -100,20 +96,29 @@ class DogAndInfantrySquad(Scene):
             buff=2,
         ).set_color(RED)
         s1_text = MarkupText("s<sub>1</sub>").next_to(s1_b, LEFT).set_color(RED)
-        side_text = Text("1").next_to(SQUAD_MARKER.get_left(), RIGHT)
-        self.play(FadeIn(s1_b, s1_text, side_text))
+        self.play(FadeIn(s1_b, s1_text))
         self.wait()
 
-        squad_dashed_line = SQUAD_MARKER[-1].copy()  # left side
+        side_text = Text("1").next_to(SQUAD_MARKER.get_right(), RIGHT)
+        self.play(FadeIn(side_text))
+        squad_dashed_line = SQUAD_MARKER[1].copy()  # right side
         squad_line = Line(-INFANTRY_SQUAD_TOTAL_SHIFT, ORIGIN)
-        s2_text_next = MarkupText("s<sub>1</sub> - 1").next_to(s2_b, RIGHT)
-        side_text_next = Text("1").next_to(squad_line, RIGHT)
+        side_next_text = Text("1").next_to(squad_line, RIGHT)
         self.play(
             Transform(squad_dashed_line, squad_line),
-            Transform(side_text, side_text_next),
+            ReplacementTransform(side_text, side_next_text),
         )
         self.wait()
-        self.play(Transform(s2_text, s2_text_next))
+
+        equals_text = Text(" = ").next_to(s2_text, RIGHT)
+        s1_next_text = s1_text.copy().next_to(equals_text, RIGHT)
+        plus_text = Text(" + ").next_to(s1_next_text, RIGHT)
+        side_next_text2 = side_next_text.copy().next_to(plus_text, RIGHT)
+        self.play(
+            FadeIn(equals_text, plus_text),
+            TransformFromCopy(s1_text, s1_next_text),
+            TransformFromCopy(side_next_text, side_next_text2),
+        )
         self.wait()
         self.clear()
 
@@ -123,8 +128,8 @@ class DogAndInfantrySquad(Scene):
         self.add(Text("CUES 2 / 3"))
         self.wait(duration=1)
         self.clear()
-        self.add(MarkupText("TIME IN PERCENT UNITS"))
-        self.wait(duration=1)
+        self.add(Text("Entire travel"), Text("takes 1 unit of time").shift(DOWN))
+        self.wait(duration=2)
         self.clear()
 
         t1_b = Brace(
@@ -142,23 +147,25 @@ class DogAndInfantrySquad(Scene):
         self.add(SQUAD_MARKER, infantry_squad, t1_b, t1_text, t2_b, t2_text)
         self.wait()
 
-        self.play(FadeIn(MarkupText("t<sub>1</sub> + t<sub>2</sub> = 1").to_edge(UP)))
+        up_equation_text = MarkupText("t<sub>1</sub> + t<sub>2</sub> = 1").to_edge(UP)
+        self.play(FadeIn(up_equation_text))
         self.wait()
 
-        t2_text_next = MarkupText("1 - t<sub>1</sub>").next_to(t2_b, RIGHT)
-        self.play(ReplacementTransform(t2_text, t2_text_next))
-        self.wait()
-
-        t2_equals_text = MarkupText("t<sub>2</sub> = ").next_to(t2_b, RIGHT)
+        equals_one_text = up_equation_text[-2:].copy()
+        equals_one_dest_text = equals_one_text.copy().next_to(t2_text, RIGHT)
+        minus_text = Text('-').next_to(equals_one_dest_text, RIGHT)
+        t1_text = up_equation_text[0:2].copy()
+        t1_dest_text = t1_text.copy().next_to(minus_text, RIGHT)
         self.play(
-            FadeIn(t2_equals_text), t2_text_next.animate.next_to(t2_equals_text, RIGHT)
+            Transform(equals_one_text, equals_one_dest_text),
+            FadeIn(minus_text),
+            Transform(t1_text, t1_dest_text),
         )
         self.wait()
-
         self.clear()
 
         """CUES 3/3"""
-        self.next_section("Cues 3/3", skip_animations=True)
+        self.next_section("Cues 3/3", skip_animations=False)
 
         self.add(Text("CUES 3 / 3"))
         self.wait(duration=1)
@@ -415,6 +422,7 @@ class DogAndInfantrySquad(Scene):
             ReplacementTransform(Group(b1_text, b2_text), sol_b_text),
         )
         self.wait()
+        self.clear()
 
         """SOLUTION"""
         self.next_section("Solution", skip_animations=True)
