@@ -38,18 +38,22 @@ $$
 ![obliczone-s2](https://user-images.githubusercontent.com/22799520/204910196-dc2df1d8-0951-4215-89f9-352d63ef748c.png)
 
 where:  
-&emsp;_C - total length_  
-&emsp;_D - squad length_
+&emsp;_C: total length_  
+&emsp;_D: squad length_
 
 ---
 
-### $t_1$ and $t_2$ into $t$.  
-First and second phase of movement (t_1 + t_2) last 1 unit of time.  
+### $t_1$ and $t_2$ into $t$
+First and second phase of movement (t<sub>1</sub> + t<sub>2</sub>) last 1 unit of time.  
 Variable $t$ is time of movement in first phase.  
 So:
 
-    t_1 = t 
-    t_2 = 1 - t
+$$
+  \begin{cases}
+  t_1 = t\\
+  t_2 = 1 - t
+  \end{cases}
+$$
 
 ---
 
@@ -64,47 +68,71 @@ $$ s_1 = (C - D)t + D $$
 ---
 
 ### Let's substitute everything into first equation (1)
-$$ \frac{s_1}{t_1} = \frac{s_2}{t_2} $$
-$$ \frac{(C - D)*t+D}{t} = \frac{s_1-(C-D)}{1-t} $$
-$$ \frac{(C - D)*t+D}{t} = \frac{(C - D)*t+D-(C-D)}{1-t} $$
-$$ \frac{(C - D)*t+D}{t} = \frac{(C - D)*t+2D-C}{1-t} $$
+
+$$ \frac{s_1}{t_1} = \frac{s_2}{t_2} $$  
+
+$$ \frac{(C - D)*t+D}{t} = \frac{s_1-(C-D)}{1-t} $$  
+
+$$ \frac{(C - D)*t+D}{t} = \frac{(C - D)*t+D-(C-D)}{1-t} $$  
+
+$$ \frac{(C - D)*t+D}{t} = \frac{(C - D)*t+2D-C}{1-t} $$  
 
 Multiplying fractions:
 
 $$ (C - D)t^2 + 2Dt - Ct = (C - D)t + D - (C - D)t^2 - Dt$$
+
 $$ 2(C - D)t^2 + 3Dt - Ct - (C - D)t - D = 0 $$
+
 $$ 2(C - D)t^2 + 3Dt - 2Ct + Dt - D = 0 $$
+
 $$ 2(C - D)t^2 + (4D - 2C)t - D = 0 $$
+
 $$ \begin{equation} 2(C - D)t^2 + 2(2D - C)t - D = 0 \end{equation} $$
 
 Now we solve quadratic equation. Let's see that for data from our assignment equation greatly simplifies.  
 $t$ in first power is reduced. And later we easily solved the rest of the assignment.
 
 $$
-  t = \frac{\sqrt{2}}{2}\approx 71\%   
-  s_1 \approx 34.14m   
-  s_2 \approx 14.14m    
+\begin{cases}
+  t = \frac{\sqrt{2}}{2}\approx 71\\% \\
+  s_1 \approx 34.14m \\
+  s_2 \approx 14.14m \\
   s_1 + s_2 = 48.28m
+\end{cases}
 $$
 
 ---
 
-### To get more general equations we must solve quadratic equation (2):  
+### To get more general equations we must solve quadratic equation (2):
+
 $$ t_{1,2} = \frac{-2(2D-C) \pm \sqrt{4(2D-C)^2 + 4*2(C-D)*D}}{4(C-D)} $$
+
 $$ t_{1,2} = \frac{-(2D-C) \pm \sqrt{(2D-C)^2 + 2(C-D)*D}}{2(C-D)} $$
+
 $$ t_{1,2} = \frac{-(2D-C) \pm \sqrt{4D^2 - 4DC + C^2 - 2D^2 + 2CD}}{2(C-D)} $$
+
 $$ t_{1,2} = \frac{-(2D-C) \pm \sqrt{2D^2 -2DC + C^2}}{2(C-D)} $$
+
 $$ t_{1,2} = \frac{-(2D-C) \pm \sqrt{(D - C)^2 + D^2}}{2(C-D)} $$
+
 or
+
 $$ t_{1,2} = \frac{-(2D-C) \pm \sqrt{(C - D)^2 + D^2}}{2(C-D)} $$
+
 Let's put everything into form $(C - D)$
+
 $$ t_{1,2} = \frac{(C - D) \pm \sqrt{(C - D)^2 + D^2} - D}{2(C-D)} $$
-We know that $C > D$. and that our result $t \in (0; 1)$. So our $t$ must be positive.  
-Denominator always be positive. Variable $D$ is greater than 0. The value on the square root is greater than, what is on the left, i.e $(C - D)$.  
-It means that we can extrude case with minus sign under square root. Because it always return negative nominator, and so negative $t$.  
+
+Destroy $\pm$ sign:  
+We know that $C > D$. and that our result $t \in (0; 1)$. So our $t$ $\ge$ 0.  
+Denominator always will be positive. In nominator $\sqrt{(C - D)^2 + D^2} \ge C$. So we can extrude vatiant from '-' sign. 
+
 $$ t = \frac{(C - D) + \sqrt{(C - D)^2 + D^2} - D}{2(C-D)} $$
+
 We can simplify further:
+
 $$ t = \frac{1}{2} + \frac{\sqrt{(C - D)^2 + D^2} - D}{2(C-D)} $$
+
 and:
 
 $$
@@ -133,12 +161,12 @@ $$
 $$
 
 where:  
-    $s_{squad}$ total distance travelled by squad  
-    $t$ time of first phase movement (in percent)  
-    $s_1$ distance travelled by dog in first phase  
-    $s_2$ distance travelled by dog in second phase  
-    $D$ squad length  
-    $C$ total height
+    s<sub>squad</sub>: &emsp; total distance travelled by squad  
+    t: &emsp; time of first phase movement (in percent)  
+    s<sub>1</sub>: &emsp; distance travelled by dog in first phase  
+    s<sub>2</sub>: &emsp; distance travelled by dog in second phase  
+    D: &emsp; squad length  
+    C: &emsp; total height
 
 ---
 
