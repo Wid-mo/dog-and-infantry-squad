@@ -1,6 +1,8 @@
 # dog-and-infantry-squad
 Visual solution to math problem. And solving more general problem.
 
+[Wideo](https://youtu.be/7yRVoKLpoa4)
+
 
 <img src="https://user-images.githubusercontent.com/22799520/204902772-afe315ab-e8e5-4ec5-b8c2-69eb3941bb4c.gif" alt="thumbnail" width=500 title='thumbnail' />
 
@@ -144,8 +146,9 @@ $$
 
 And how to understand this expression: $\frac{\sqrt{s_{squad}^2 + D^2} - D}{s_{squad}}$?  
 Let's see this inequality: $$\sqrt{a^2+b^2} \le \sqrt{a^2} + \sqrt{b^2}$$
-Applying this transformation on expression we get the information that this expression cannot be greater than 1.  
-and so $t$ takes values in the range: $$t \in (0.5; 1)$$
+So $\frac{\sqrt{s_{squad}^2 + D^2} - D}{s_{squad}} \in (0; 1)$  
+This means that:
+$$t \in (0.5; 1)$$
 
 ---
 
